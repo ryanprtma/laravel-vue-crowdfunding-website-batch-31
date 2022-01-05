@@ -17,6 +17,7 @@ class user extends Model
 
     protected static function boot()
     {
+        //instance of boot
         parent::boot();
 
         static::creating(function($model){
