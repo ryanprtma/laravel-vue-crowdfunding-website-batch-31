@@ -13,7 +13,7 @@ class TestController extends Controller
     // }
 
     public function test(){
-        return 'berhasil masuk';
+        return 'berhasil masuk sebagai quest';
     }
 
     public function test1(){
@@ -21,7 +21,6 @@ class TestController extends Controller
     }
 
     public function admin(){
-        dd(Auth::user());
-        return 'admin berhasil masuk';
+        return 'anda berhasil masuk sebagai admin';
     }
 }

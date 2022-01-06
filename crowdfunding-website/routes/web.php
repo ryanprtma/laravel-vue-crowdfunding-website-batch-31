@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 // Route::get('/test', 'TestController@test')->middleware('dateMiddleware');
 
-Route::middleware('dateMiddleware')->group(function(){
+Route::middleware('auth')->group(function(){
     Route::get('/test', 'TestController@test');
 });
 
-Route::middleware(['auth', 'adminMiddleware'])->group(function(){
+Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/test1', 'TestController@test1');
     Route::get('/admin', 'TestController@admin');
 });
