@@ -5,15 +5,19 @@ namespace App;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
-class roles extends Model
+class user extends Model
 {
-    protected $fillable = ['name'];
+    protected $table='user';
+    protected $fillable = [
+        'username', 'email', 'name', 'role_id',
+    ];
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected static function boot()
     {
+        //instance of boot
         parent::boot();
 
         static::creating(function($model){
@@ -25,15 +29,8 @@ class roles extends Model
         });
     }
 
-    
-    public function user()
+    public function roles()
     {
-        return $this->hasMany('App\user');
+        return $this->belongsTo('App\roles');
     }
-    
-    public function User()
-    {
-        return $this->hasMany('App\User');
-    } 
-    
 }
