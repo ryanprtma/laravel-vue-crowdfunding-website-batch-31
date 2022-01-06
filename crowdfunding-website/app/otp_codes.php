@@ -2,12 +2,11 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
-class roles extends Model
+class otp_codes extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['otp'];
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
@@ -23,17 +22,8 @@ class roles extends Model
                 $model->{$model->getKeyName()}=Str::uuid();
             }
         });
-    }
 
-    
-    // public function user()
-    // {
-    //     return $this->hasMany('App\user');
-    // }
-    
-    public function User()
-    {
-        return $this->hasMany('App\Users');
-    } 
-    
+    public function User(){
+        return $this->hasOne('App\User');
+        }
 }

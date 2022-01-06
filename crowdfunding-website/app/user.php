@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'role_id',
+        'name', 'username', 'email', 'password', 'role_id',
     ];
 
     protected $primaryKey = 'id';
@@ -61,4 +61,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\roles');
     }
+
+    public function otp_codes(){
+        return $this->belongsTo('App\otp_codes');
+      }
 }
