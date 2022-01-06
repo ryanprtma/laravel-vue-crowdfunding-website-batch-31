@@ -15,4 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', 'TestController@test');
+// Route::get('/test', 'TestController@test')->middleware('dateMiddleware');
+
+Route::middleware('dateMiddleware')->group(function(){
+    Route::get('/test', 'TestController@test');
+});
+
+Route::middleware(['auth', 'adminMiddleware'])->group(function(){
+    Route::get('/test1', 'TestController@test1');
+    Route::get('/admin', 'TestController@admin');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

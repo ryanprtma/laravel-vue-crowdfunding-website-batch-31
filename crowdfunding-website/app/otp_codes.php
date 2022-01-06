@@ -2,28 +2,14 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class otp_codes extends Model
 {
-    protected $fillable = ['otp'];
-    protected $primaryKey = 'id';
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function($model){
-
-
-            if (empty($model->{$model->getKeyName()})){
-                $model->{$model->getKeyName()}=Str::uuid();
-            }
-        });
+    protected $fillable = ['otp', 'user_id'];
 
     public function User(){
         return $this->hasOne('App\User');
-        }
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRolesIdToUsersTable extends Migration
+class CreateOtpCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddRolesIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->uuid('role_id')->after('password');
-            $table->foreign('role_id')->references('id')->on('roles');
+        Schema::create('otp_codes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('otp');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ class AddRolesIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('otp_codes');
     }
 }
