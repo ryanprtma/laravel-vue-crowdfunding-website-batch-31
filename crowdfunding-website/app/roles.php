@@ -2,28 +2,16 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 
 class roles extends Model
 {
+    use UsesUuid;
+
     protected $fillable = ['name'];
     protected $primaryKey = 'id';
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function($model){
-
-
-            if (empty($model->{$model->getKeyName()})){
-                $model->{$model->getKeyName()}=Str::uuid();
-            }
-        });
-    }
+    
 
     
     // public function user()

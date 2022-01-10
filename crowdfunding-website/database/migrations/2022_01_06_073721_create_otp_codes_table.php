@@ -18,6 +18,7 @@ class CreateOtpCodesTable extends Migration
             $table->integer('otp');
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->dateTime('valid_until');
             $table->timestamps();
         });
     }
