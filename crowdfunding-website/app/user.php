@@ -2,16 +2,18 @@
 
 namespace App;
 
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\UsesUuid;
 use App\roles;
+use App\otp_codes;
+use Carbon\Carbon;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use UsesUuid;
@@ -59,6 +61,21 @@ class User extends Authenticatable
         return false;
     }
 
+    public function generate_otp_code(){
+        do {
+            $random = mt_rand(100000, 999999);
+            $check = otp_codes::where('otp', $random)->first();
+        } while ($check);
+    
+        $now = Carbon::now();
+    
+        //creaete otp
+        $otp_code = otp_codes::updateOrCreate(
+            ['user_id'=> $this->id],
+            ['otp' => $random, 'valid_until' => $now->addMinute(5)]
+        );
+    }
+
     public function get_role_admin(){
         $role = roles::where('name', 'admin')->first();
         return $role->id;
@@ -75,5 +92,29 @@ class User extends Authenticatable
         static::creating(function($model){
             $model->role_id = $model->get_role_user();
         });
+
+        static::created(function($model){
+            $model->generate_otp_code();
+        });
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
