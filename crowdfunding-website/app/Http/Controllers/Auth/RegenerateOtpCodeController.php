@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Mail;
+use App\mail\RegeneratedOtpCodeMail;
 
 class RegenerateOtpCodeController extends Controller
 {
@@ -25,6 +27,8 @@ class RegenerateOtpCodeController extends Controller
         $user->generate_otp_code();
 
         $data['user'] = $user;
+
+        Mail::to($user)->send(new RegeneratedOtpCodeMail($user));
 
         return response()->json([
             'response_code'=> '00',
