@@ -11,16 +11,16 @@ use App\User;
 class RegeneratedOtpCodeMail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $user;
+    protected $user_otp;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user_otp)
     {
-        $this->user = $user;
+        $this->user_otp = $user_otp;
     }
 
     /**
@@ -33,7 +33,7 @@ class RegeneratedOtpCodeMail extends Mailable
         return $this->from('example@example.com')
                     ->view('send_email_regenerated_otp_code')
                     ->with([
-                        'otp_code' => $this->user['otp'],
+                        'otp_code' => $this->user_otp->otp_codes->otp,
                     ]);
     }
 }

@@ -9,7 +9,14 @@ use Mail;
 use App\mail\RegeneratedOtpCodeMail;
 
 class RegenerateOtpCodeController extends Controller
-{
+{   
+
+    public function get_otp_code(){
+        $otp_code=otp_codes::where(
+            ['user_id'=> $this->id],
+            ['otp' => $this->otp]
+        );
+    }
     /**
      * Handle the incoming request.
      *
@@ -28,7 +35,11 @@ class RegenerateOtpCodeController extends Controller
 
         $data['user'] = $user;
 
-        Mail::to($user)->send(new RegeneratedOtpCodeMail($user));
+        $user_otp = User::where('email', $request->email)->first();
+        
+        $user_otp->$this()-> get_otp_code();
+
+        Mail::to($user_otp)->send(new RegeneratedOtpCodeMail($user_otp));
 
         return response()->json([
             'response_code'=> '00',

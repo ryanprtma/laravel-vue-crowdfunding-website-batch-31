@@ -76,6 +76,13 @@ class User extends Authenticatable implements JWTSubject
         );
     }
 
+    public function get_otp_code(){
+        $otp_code=otp_codes::where(
+            ['user_id'=> $this->id],
+            ['otp' => $this->otp]
+        );
+    }
+
     public function get_role_admin(){
         $role = roles::where('name', 'admin')->first();
         return $role->id;
