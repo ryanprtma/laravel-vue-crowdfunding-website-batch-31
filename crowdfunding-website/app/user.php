@@ -51,7 +51,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function otp_codes(){
-        return $this->belongsTo('App\otp_codes');
+        return $this->hasOne('App\otp_codes');
     }
 
     public function isAdmin(){
@@ -73,13 +73,6 @@ class User extends Authenticatable implements JWTSubject
         $otp_code = otp_codes::updateOrCreate(
             ['user_id'=> $this->id],
             ['otp' => $random, 'valid_until' => $now->addMinute(5)]
-        );
-    }
-
-    public function get_otp_code(){
-        $otp_code=otp_codes::where(
-            ['user_id'=> $this->id],
-            ['otp' => $this->otp]
         );
     }
 

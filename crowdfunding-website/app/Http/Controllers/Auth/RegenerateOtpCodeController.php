@@ -33,13 +33,9 @@ class RegenerateOtpCodeController extends Controller
 
         $user->generate_otp_code();
 
-        $data['user'] = $user;
+        $data[] = $user;
 
-        $user_otp = User::where('email', $request->email)->first();
-        
-        $user_otp->$this()-> get_otp_code();
-
-        Mail::to($user_otp)->send(new RegeneratedOtpCodeMail($user_otp));
+        Mail::to($user)->send(new RegeneratedOtpCodeMail($user));
 
         return response()->json([
             'response_code'=> '00',
