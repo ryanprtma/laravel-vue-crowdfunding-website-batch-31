@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Mail;
 use App\mail\UserRegisteredMail;
 
-class SendEmailNotificationUserRegistered
+class SendEmailNotificationUserRegistered implements ShouldQueue
 {
     /**
      * Create the event listener.
