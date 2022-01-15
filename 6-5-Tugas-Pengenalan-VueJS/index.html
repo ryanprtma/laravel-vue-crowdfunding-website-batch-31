@@ -1,43 +1,38 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soal 2</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soal 1</title>
 </head>
 <body>
-    <div id="app">
-        <button onClick="vm.openForm()">Open Form</button>
-        <h1>{{'Nilai a : ' + a}}</h1>
-        <h1>{{'Rata-rata : ' + rata2}}</h1>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                a : 0,
-                rata2 : 0,
+<div id="app">
+{{ fullName }}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        firstName : 'Tuanku',
+        lastName : 'Imam Bonjol'
+        },
+        computed : {
+        fullName : {
+            get :function(){
+                return `${this.firstName} ${this.lastName}`
             },
-            methods : {
-                openForm:function(){
-                    let k = 0
-                    let arr = []
-                    do{
-                        this.a=parseInt(prompt("Masukkan nilai a"))
-                        arr.push(this.a)
-                        k+=this.a
-                        this.a=k
-                        this.n=arr.length
-                        console.log('jumlah data : ' + k)
-                        console.log('banyak data : ' + this.n)
-                        this.rata2 = this.a/this.n
-                    }
-                    while(k<10)
-                }
+            set : function(params){
+                let arr = params.split(' ')
+                this.firstName = arr[0]
+                this.lastName = arr[1]
             }
-        })
-    </script>
+        },
+    }
+})
+</script>
 </body>
 </html>
