@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Js</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button onCLick="vm.notif(vm.name)">ClickMe</button> -->
+        
+        <input type="text" v-model:value="datas"/>
+        <button type='submit' onClick="vm.masukkanData(vm.datas)">add</button>
+        <p>{{fullName}}</p>
+        
+        <table id="app">
+            <tr v-for="(data) in users" > 
+                <td>{{data.name}}</td>
+                <td>
+                    <button value={data.id} onClick="vm.edit()">edit</button>
+                    <button >delete</button>
+                </td>
+            </tr>
+        </table>
+        
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                users: [
+                    {
+                        'name': 'Muhammd Iqbal Mubarak'
+                    },
+                    {
+                        'name': 'Ruby Purwanty'
+                    },
+                    {
+                        'name': 'Faqih Muhammad'
+                    }
+                ],
+                datas : 'message',
+            },
+            
+            computed: {
+                fullName :{
+                get :function(){
+                        return this.users[this.users.length-1].name 
+                    },
+                }
+            },
+            methods: {
+                masukkanData(datas) {
+                    let obj = {}
+                    obj.name=datas
+                    this.users.push(obj)
+                    this.length = this.users.length
+                    console.log(this.users.length)
+                    console.log(this.users)
+                },
+                edit(){
+                    console.log(this.users.id)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
