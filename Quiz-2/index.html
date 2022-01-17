@@ -10,6 +10,8 @@
 
 <body>
     <div id="app">
+        <!-- <button onCLick="vm.notif(vm.name)">ClickMe</button> -->
+        
         <input type="text" v-model:value="datas"/>
         <button type='submit' onClick="vm.masukkanData(vm.datas)"></a>{{button}}</button>
 
@@ -17,7 +19,7 @@
             <li v-for="(user, index) in users" :key="index" style="color: black;">
             <p style="color: black;">{{ user.name }}
                 <button @click="edit(index, user.name)">edit</button>
-                <button @click="hapus(index)">delete</button>
+                <button >delete</button>
             </p>
             </li>
         </ul>
@@ -42,8 +44,7 @@
                 datas : '',
                 lastindex :0,
                 editStatus:false,
-                button:"add",
-                konfirmasiHapus:false
+                button:"add"
             },
             
             computed: {
@@ -73,7 +74,6 @@
                         else {
                             this.users.splice(this.lastindex, this.lastindex, obj) 
                         }
-                        console.log("data terupdate")
                     }
                     
                 },
@@ -82,25 +82,8 @@
                     this.lastindex=index
                     this.datas=name
                     this.button="update"
-                    console.log(`Status edit : ${this.editStatus}`)
-                },
-                hapus(index){
-                    let confirmAction = confirm("Are you sure to execute this action?")
-                    if (confirmAction) {
-                        this.konfirmasiHapus=true
-                        if(this.konfirmasiHapus==true){
-                            this.users.splice(index, 1)
-                            console.log(`konfirmasi hapus : ${this.konfirmasiHapus}`)
-                            alert("Action successfully executed")
-                            
-                        }
-                    
-                    } else {
-                    alert("Action canceled");
-                    }
-                    
-
-                },
+                    console.log(this.editStatus)
+                }
             }
         })
     </script>
