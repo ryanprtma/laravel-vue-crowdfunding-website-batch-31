@@ -8,11 +8,30 @@
 </head>
 <body>
 <div id="app">
-    <table>
-        <tr v-for="member of blogs">
-            <td>{{ member.name }}</td>
-            <td>{{ member.address }}</td>
-        </tr>
+    <table border=1>
+        <thead>
+            <th>Nama</th>
+            <th>Alamat</th>
+            <th>No HP</th>
+            <th>Foto Profile</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr v-for="member of blogs">
+                <td>{{ member.name }}</td>
+                <td>{{ member.address }}</td>
+                <td>{{ member.no_hp }}</td>
+                <td>
+                    <img width="100" :src="member.photo_profile ? member.photo_profile : 
+                    'https://dummyimage.com/16:9x1080' " alt="foto profile">
+                </td>
+                <td>
+                    <button @click="edit(index, user.name)">edit</button>
+                    <button @click="hapus(index)">delete</button>
+                </td>
+            </tr>
+        </tbody>
+        
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
