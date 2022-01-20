@@ -13,3 +13,8 @@ Route::group([
     Route::post('update-password', 'UpdatePasswordController');
     Route::post('login', 'LoginController'); 
 });
+
+Route::middleware(['api', 'emailverified', 'auth:api'])->group(function(){
+    Route::get('profile/show', 'ProfileController@show');
+    // Route::get('/admin', 'TestController@admin');
+});

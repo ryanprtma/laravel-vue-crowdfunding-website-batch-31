@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app1">
+        <h1>App 1</h1>
+        <blog-component
+        v-for="blog in blogs"
+        :blog="blog"
+        ></blog-component>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+    <script>
+        //Global
+        var BlogComponent = {
+            template : 
+            `
+            <div>
+                <h1>{{blog.title}}</h1>
+                <p>{{blog.content}}</p>
+            </div>
+            `,
+            data (){
+                return {
+                    pesan : 'Blog Component'
+                }
+            },
+            props : ['blog']
+        }
+
+        new Vue({
+            el: '#app1',
+            components : {
+                'blog-component' : BlogComponent
+            },
+            data : {
+                blogs : [
+                    {
+                        title : 'Ini judul 1',
+                        content : 'ini konten 1'
+                    },
+                    {
+                        title : 'Ini judul 2',
+                        content : 'ini konten 2'
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

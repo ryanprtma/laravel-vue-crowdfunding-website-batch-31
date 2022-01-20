@@ -8,6 +8,38 @@
 </head>
 <body>
 <div id="app">
+    <form @submit.prevent="submitForm($event)">
+        <label for="name"> Nama :</label>
+        <input name="name" ref="name" v-model:value="name" type="text">
+        <br>
+
+        <label for="address">Alamat : </label>
+        <input name="address" ref="address" v-model:value="address" type="text">
+        <br>
+
+        <label for="no_hp">Nomor Hp</label>
+        <input name="no_hp" ref="no_hp" v-model:value="no_hp" type="text">
+        <br>
+
+        <label for="photo_profile">Foto Profile</label>
+        <input name="no_hp" ref="photo_profile" v-model:value="photo_profile" type="text">
+
+        <div v-if="buttonStatus=='submit'">
+            <input type="submit" value="SUBMIT">
+        </div>
+
+        <div v-else-if="buttonStatus=='update'">
+            <input @click="update(id)" type="button" value="UPDATE">
+            <input @click="clearForm()" type="button" value="CANCEL">
+        </div>
+
+        
+    </form>
+    <p>{{name}}</p>
+    <p>{{address}}</p>
+    <p>{{no_hp}}</p>
+    <p>{{photo_profile}}</p>
+
     <table border=1>
         <thead>
             <th>Nama</th>
@@ -17,21 +49,20 @@
             <th>Action</th>
         </thead>
         <tbody>
-            <tr v-for="member of blogs">
+            <tr v-for="(member, index) in blogs" :key="index">
                 <td>{{ member.name }}</td>
                 <td>{{ member.address }}</td>
                 <td>{{ member.no_hp }}</td>
                 <td>
-                    <img width="100" :src="member.photo_profile ? member.photo_profile : 
+                    <img width="100" :src="member.photo_profile ? photoDomain + member.photo_profile : 
                     'https://dummyimage.com/16:9x1080' " alt="foto profile">
                 </td>
-                <td>
-                    <button @click="edit(index, user.name)">edit</button>
-                    <button @click="hapus(index)">delete</button>
+                <td >
+                    <button @click="edit(index, member.id, member.name, member.address, member.no_hp, member.photo_profile, member)">edit</button>
+                    <button @click="remove(member.id)">delete</button>
                 </td>
             </tr>
         </tbody>
-        
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -40,6 +71,15 @@
     var vm = new Vue({
         el: '#app',
         data: {
+        index : null,
+        id : null,
+        name : "",
+        address : "",
+        no_hp : "",
+        photo_profile : "",
+        photoDomain:'http://demo-api-vue.sanbercloud.com',
+        getStatus: 1,
+        buttonStatus:'submit',
         blogs : []
         },
         methods : {
@@ -51,7 +91,7 @@
 
                 axios(config)
                     .then((response)=>{
-                        console.log(response)
+                        console.log(response.data.message)
                         this.blogs=response.data.members
                         console.log(this.blogs)
                     })
@@ -59,10 +99,104 @@
                         console.log(error)
                     })
             },
+            submitForm : function(){
+                let formData = new FormData()
+                console.log(formData.append('name', this.name))
+                formData.append('address', this.address)
+                formData.append('no_hp', this.no_hp)
+                formData.append('photo_profile', this.photo_profile)
+                console.log(formData)
+
+                const config = {
+                    method : "post",
+                    url : "http://demo-api-vue.sanbercloud.com/api/member",
+                    data : formData
+                }
+
+                axios(config)
+                    .then((response)=>{
+                        console.log(response.data.message)
+                        this.clearForm()
+                        this.getStatus=1
+                        this.getBlogs()
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+
+                console.log(event)
+            },
+            remove : function(id){
+                console.log(id)
+                const config = {
+                    method : "post",
+                    url : `http://demo-api-vue.sanbercloud.com/api/member/${id}`,
+                    params : { _method : "DELETE"}
+                }
+
+                axios(config)
+                    .then((response)=>{
+                        console.log(response.data.message)
+                        this.getStatus=1
+                        this.getBlogs()
+
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            },
+            edit : function(...rest){
+                [index, id, nama, alamat, noHp, foto, member]=rest
+                console.log(nama)
+                console.log(foto)
+                this.index=index
+                this.id=id
+                this.name=nama
+                this.address=alamat
+                this.no_hp=noHp
+                this.photo_profile=foto
+                this.buttonStatus='update'
+            },
+            update(id){
+                let formData = new FormData()
+                console.log(formData.append('name', this.name))
+                formData.append('address', this.address)
+                formData.append('no_hp', this.no_hp)
+                formData.append('photo_profile', this.photo_profile)
+                console.log(formData)
+
+                const config = {
+                    method : "post",
+                    url : `http://demo-api-vue.sanbercloud.com/api/member/${id}`,
+                    params : { _method : "PUT"},
+                    data : formData
+                }
+
+                axios(config)
+                    .then((response)=>{
+                        console.log(response.data.message)
+                        this.clearForm()
+                        this.getStatus=1
+                        this.getBlogs()
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            },
+            clearForm: function(){
+                this.name=""
+                this.address=""
+                this.no_hp=""
+                this.photo_profile=""
+                this.buttonStatus='submit'
+                this.id=null
+            }
         },
         created(){
-            this.getBlogs()
-        }
+            if(this.getStatus===1){
+                this.getBlogs()
+            }
+        },
 })
 </script>
 </body>

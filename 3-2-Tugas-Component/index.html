@@ -34,27 +34,13 @@
 
         </div>
 
- 
-
-        <div class="usersList">
-
-            <ul>
-
-                <li v-for="(user , index) in reverseUsers" :key="index">
-
-                    {{ user.name }} ||
-
-                    <button @click="editUser(index)">Edit</button>
-
-                    <button @click="deleteUser(index)">Delete</button>
-
-                </li>
-
-            </ul>
-
-        </div>
-
- 
+        <userlist-component
+        v-for="(user , index) in reverseUsers" :key="index"
+        :users="user"
+        :index="index"
+        @edit="editUser"
+        @remove="deleteUser">
+        </userlist-component>
 
     </div>
 
@@ -62,9 +48,38 @@
 
     <script>
 
+        var UserListComponent = {
+            template : `
+            <div>
+
+                <ul>
+
+                    <li >
+
+                        {{users.name }} ||
+
+                        <button @click="$emit('edit', index)"
+                        >Edit</button>
+
+                        <button @click="$emit('remove', index)">Delete</button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            `,
+            props : ['users', 'index']
+        }
+
         let vm = new Vue({
 
             el: '#app',
+
+            components : {
+                'userlist-component' : UserListComponent
+            },
 
             data: {
 

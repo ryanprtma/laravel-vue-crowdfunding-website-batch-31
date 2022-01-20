@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <blog-component>
+            <template v-slot:title=propSlot>
+                {{propSlot.blogs[1].title}}
+            </template>
+            <template v-slot:deskripsi=propSlot>
+                {{propSlot.blogs[1].title}}
+            </template>
+        </blog-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var BlogComponent = {
+            template : `
+            <div>
+                <slot name="title" v-bind:blogs="blogs">{{blogs[0].title}}</slot>
+                <br>
+                <slot name="deskripsi" v-bind:blogs="blogs">{{blogs[0].description}}</slot>
+            </div>
+            `,
+            data(){
+                return{
+                    blogs : [
+                        {
+                            title : "ini judul pertama",
+                            description : "deskripsi pertama"
+                        },
+                        {
+                            title : "ini judul kedua",
+                            description :"deskripsi kedua"
+                        }
+                    ]
+                }
+            }
+        }
+
+        const vm = new Vue ({
+            el : '#app',
+            components : {
+                'blog-component' : BlogComponent
+            }
+        })
+    </script>
+</body>
+</html>

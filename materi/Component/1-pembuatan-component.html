@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        //cara 1
+        <hello-world></hello-world>
+        //cara 2
+        <halo-dunia></halo-dunia>
+        //cara 3
+        <test-component></test-component>
+    </div>
+
+    //cara 3
+    <template id="test">
+        <h1>Bonjour</h1>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/template" id="halo-dunia">
+        //cara 2
+        <h1>Halo dunia</h1>
+    </script>
+    <script>
+        //cara 1
+        Vue.component('hello-world', {
+            template : '<h1>Hello World</h1>'
+        },'halo-dunia',{
+            template : '#halo-dunia'
+        })
+
+        //cara 2
+        Vue.component('halo-dunia',{
+            template : '#halo-dunia'
+        })
+
+        //cara 3
+        Vue.component('test-component', {
+            template : '#test'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+</html>

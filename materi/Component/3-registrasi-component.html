@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app1">
+        <h1>App 1</h1>
+        <component-satu></component-satu>
+        <component-dua></component-dua>
+        <component-tiga></component-tiga>
+    </div>
+
+    <div id="app2">
+        <h1>App 2</h1>
+        <component-satu></component-satu>
+        <component-dua></component-dua>
+        <component-tiga></component-tiga>
+        <component-a></component-a>
+    </div>
+
+    <div id="app3">
+        <component-a></component-a>
+    </div>
+
+    <template id="component-satu">
+        <h1>Bonjour</h1>
+    </template>
+
+    <template id="component-dua">
+        <h1>Bonjour</h1>
+    </template>
+
+    <template id="component-tiga">
+        <h1>Bonjour</h1>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+    <script>
+        //Global
+        var ComponentA = {
+            template : '<p>Component A</p>'
+        }
+        //kebab case
+        Vue.component('component-satu', {
+            template : '#component-satu'
+        })
+
+        //Pascal Case
+        Vue.component('ComponentDua', {
+            template : '#component-dua'
+        })
+
+        Vue.component('component-tiga', {
+            template : '#component-tiga'
+        })
+
+        new Vue({
+            el: '#app1',
+        })
+
+        new Vue({
+            el: '#app2',
+        })
+
+        //Local 
+        new Vue({
+            el:'#app3',
+            components : {
+                'component-a' : ComponentA
+            }
+        })
+    </script>
+</body>
+</html>
