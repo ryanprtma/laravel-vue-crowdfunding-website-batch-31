@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script type="module">
+        import {CounterComponent} from './CounterComponent.js'
+        const store = new Vuex.Store({
+            strict : true,
+            state : {
+                counter : 0
+            },
+            //terkadang getter tidak mereturn satu state saja 
+            getters : {
+                counter(state){
+                    return state.counter
+                }
+            },
+            mutations : {
+                increment (state, payload){
+                    state.counter =+ payload.number
+                },
+                //mutatios tidak diizinkan asynchronus
+                // increment (state){
+                //     setTimeout(()=>{
+                //         state.counter++
+                //     }, 2000)
+                // }
+            },
+            actions : {
+                increments (context){
+                    setTimeout(()=>{
+                        context.commit('increment', {number : 10})
+                    }, 2000)
+                }
+            }
+        })
+        const vm = new Vue({
+            el:'#app',
+            store,
+            // //state
+            // data : {
+            //     counter : 0
+            // },
+            // computed : {
+            //     counters(){
+            //         return store.state.counter
+            //     }
+            // },
+            //view
+            // template : `
+            //     <div>
+            //         {{counters}}
+            //         <button @click="increment()">counter</button>    
+            //     </div>
+            
+            // `,
+            components : {
+                'counter-component' : CounterComponent
+            },
+            template : `
+            <div>
+                <counter-component></counter-component>
+                <button @click="increment()">+</button>    
+            </div>
+            `,
+            //action
+            methods : {
+                increment(){
+                    // store.commit('increment') untuk memanggil mutations
+                    // store.state.counter++ akan error karena state nya strict
+                    //untuk memanggil actions
+                    store.dispatch('increments')
+                    //mengkommit mutations
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

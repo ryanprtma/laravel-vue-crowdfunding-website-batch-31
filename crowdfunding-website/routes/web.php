@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+// Route::get('/', function () {
+//     return view('app');
+// });
+
+// Route::get('/{any?}', function(){
+//     return 'masuk ke sini';
+// })->where('any', '.*');
+
+Route::view('/{any}', 'app')->where('any', '.*');
 
 // Route::get('/test', 'TestController@test')->middleware('dateMiddleware');
 

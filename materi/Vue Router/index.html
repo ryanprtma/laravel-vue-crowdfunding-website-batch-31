@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Belajar Vue Router</h1>
+
+        <!-- Pengganti tag <a href=""></a>  -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+
+        <!-- Untuk Menampilkan component secara dinamis , sesuai dengan route yang diakses -->
+        <router-view></router-view>
+    </div>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script type="module">
+        const Home = { template: '<div>Ini Halaman Home</div>' }
+        const About = { template: '<div>Ini Halaman About</div>' }
+
+        const routes = [
+            { path: '/', component: Home , alias: '/home'},
+            { path: '/about', component: About }
+        ]
+
+        //Kemudian kita instansiasi object Vue Router dan tambahkan routes yang sudah kita buat tadi
+        const router = new VueRouter({
+            routes 
+        })
+
+        //Kemudian kita tambahkan object VueRouter yang kita namakan router ke object Vue
+        const app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+
+</body>
+</html>

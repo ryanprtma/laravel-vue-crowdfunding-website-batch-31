@@ -51,7 +51,7 @@
         <tbody>
             <tr v-for="(member, index) in blogs" :key="index">
                 <td>{{ member.name }}</td>
-                <td>{{ member.address }}</td>
+                <td><img :src="member.address" alt=""></td>
                 <td>{{ member.no_hp }}</td>
                 <td>
                     <img width="100" :src="member.photo_profile ? photoDomain + member.photo_profile : 

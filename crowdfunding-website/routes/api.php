@@ -18,3 +18,20 @@ Route::middleware(['api', 'emailverified', 'auth:api'])->group(function(){
     Route::get('profile/show', 'ProfileController@show');
     // Route::get('/admin', 'TestController@admin');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'campaign',
+], function(){
+    Route::get('random/{count}', 'CampaignController@random');
+    Route::post('store', 'CampaignController@store');
+    Route::get('/', 'CampaignController@index');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'blog',
+], function(){
+    Route::get('random/{count}', 'BLogController@random');
+    Route::post('store', 'BlogController@store');
+});
