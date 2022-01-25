@@ -12,11 +12,11 @@
         </v-list-item>
 
         <div class="pa-2" v-if="guest">
-          <v-btn block color="primary" class="mb-1">
+          <v-btn elevation="0" block color="primary" class="mb-1">
             <v-icon left>mdi-lock</v-icon>
             Login
           </v-btn>
-          <v-btn block color="succes">
+          <v-btn elevation="0" block color="succes">
             <v-icon left>mdi-account</v-icon>
             Register
           </v-btn>
@@ -49,19 +49,20 @@
       </template>
     </v-navigation-drawer>
 
-    <v-app-bar app color="success" dark>
+    <v-app-bar app color="success" dark v-if="isHome">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Crowdfunding App</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-badge color="orange" overlap>
+        <v-badge color="orange" overlap v-if="transaction > 0">
           <template v-slot:badge>
-            <span>3</span>
+            <span>{{ transaction }}</span>
           </template>
           <v-icon>mdi-cash-multiple</v-icon>
         </v-badge>
+        <v-icon v-else>mdi-cash-multiple</v-icon>
       </v-btn>
 
       <v-text-field
@@ -74,6 +75,24 @@
         solo-inverted
       >
       </v-text-field>
+    </v-app-bar>
+
+    <v-app-bar app color="success" dark v-else>
+      <v-btn icon @click.stop="$router.go(-1)">
+        <v-icon>mdi-arrow-left-circle</v-icon>
+      </v-btn>
+      <!--pemisah konten-->
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-badge color="orange" overlap v-if="transaction > 0">
+          <template v-slot:badge>
+            <span>{{ transaction }}</span>
+          </template>
+          <v-icon>mdi-cash-multiple</v-icon>
+        </v-badge>
+        <v-icon v-else>mdi-cash-multiple</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -103,7 +122,16 @@ export default {
       { title: "Home", icon: "mdi-home", route: "/" },
       { title: "Campaigns", icon: "mdi-hand-heart", route: "/campaigns" },
     ],
-    guest: true,
+    guest: false,
   }),
+  computed: {
+    isHome() {
+      console.log(this.$route.path);
+      return this.$route.path === "/" || this.$route.path === "/home";
+    },
+    transaction() {
+      return this.$store.getters.transaction;
+    },
+  },
 };
 </script>

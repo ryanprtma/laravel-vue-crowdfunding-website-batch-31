@@ -3,17 +3,19 @@
     <!-- template kategori campaign-->
     <v-container class="ma-0 pa-0" grid-list-sm>
       <div class="text-right">
-        <v-btn small to="/campaigns" class="blue--text">
+        <v-btn text small to="/campaigns" class="blue--text">
           All Campaign <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </div>
       <v-layout wrap>
         <v-flex
-          v-for="campaign in campaigns"
+          elevation="0"
+          v-for="(campaign, index) in campaigns"
           :key="`campaign-` + campaign.id"
           xs6
+          :index="index"
         >
-          <v-card :to="`/campaign/` + campaign.id">
+          <!-- <v-card :to="`/campaign/` + campaign.id">
             <v-img
               :src="campaign.image"
               class="white--text fill-height"
@@ -25,14 +27,15 @@
               >
               </v-card-title>
             </v-img>
-          </v-card>
+          </v-card> -->
+          <campaign-item :campaign="campaign" :index="index" />
         </v-flex>
       </v-layout>
     </v-container>
 
     <v-container class="ma-0 pa-0" grid-list-sm>
       <div class="text-right">
-        <v-btn small to="/blogs" class="blue--text">
+        <v-btn text small to="/blogs" class="blue--text">
           All Blogs <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </div>
@@ -64,6 +67,9 @@ export default {
     campaigns: [],
     blogs: [],
   }),
+  components: {
+    CampaignItem: () => import("../components/CampaignItem"),
+  },
   created() {
     axios
       .get("api/campaign/random/2")

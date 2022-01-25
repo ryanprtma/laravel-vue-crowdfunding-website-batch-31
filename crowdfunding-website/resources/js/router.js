@@ -19,9 +19,19 @@ const router = new Router ({
             component : ()=> import(/*webpackChunkName: "categories"*/'./views/Donations.vue')
         },
         {
-            path : '/berita',
-            name : 'berita',
+            path : '/blogs',
+            name : 'blogs',
             component : ()=> import(/*webpackChunkName: "categories"*/'./views/Berita.vue')
+        },
+        {
+            path : '/campaigns',
+            name : 'campaigns',
+            component : ()=> import(/*webpackChunkName: "categories"*/'./views/Campaigns.vue')
+        },
+        {
+            path : '/campaign/:id',
+            name : 'campaign',
+            component : ()=> import(/*webpackChunkName: "categories"*/'./views/Campaign.vue')
         },
         {
             path : '*',
