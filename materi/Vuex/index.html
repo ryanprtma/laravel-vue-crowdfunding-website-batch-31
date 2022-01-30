@@ -37,6 +37,7 @@
             },
             actions : {
                 increments (context){
+                    console.log(context)
                     setTimeout(()=>{
                         context.commit('increment', {number : 10})
                     }, 2000)
