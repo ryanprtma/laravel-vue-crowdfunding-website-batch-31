@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <!-- template kategori campaign-->
     <v-container class="ma-0 pa-0" grid-list-sm>
       <div class="text-right">
@@ -85,7 +85,7 @@ export default {
       });
 
     axios
-      .get("api/blog/random/2")
+      .get("api/blog/random/8")
       .then((response) => {
         let { data } = response.data;
         console.log(data);

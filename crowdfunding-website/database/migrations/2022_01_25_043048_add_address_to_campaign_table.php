@@ -28,7 +28,7 @@ class AddAddressToCampaignTable extends Migration
     public function down()
     {
         Schema::table('campaigns', function (Blueprint $table) {
-            $table->dropColumn(['address', 'required','collected']);
+            $table->dropColumn(['addresss', 'required','collected']);
         });
     }
 }

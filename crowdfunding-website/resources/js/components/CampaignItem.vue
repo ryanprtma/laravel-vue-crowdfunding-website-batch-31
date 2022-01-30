@@ -13,7 +13,14 @@
 
       <v-card-actions>
         <v-icon>mdi-cash</v-icon>
-        <span>Rp {{ campaign.required }}</span>
+        <span
+          >Rp
+          {{
+            campaign.required
+              ? `Rp ${campaign.required.toLocaleString()}`
+              : "belum ada donasi"
+          }}</span
+        >
         <v-spacer></v-spacer>
         <span>{{ progress }}%</span>
       </v-card-actions>

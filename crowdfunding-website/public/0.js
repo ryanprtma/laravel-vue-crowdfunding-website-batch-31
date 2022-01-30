@@ -32,6 +32,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "campaign-item",
   props: ["campaign", "index"],
@@ -103,7 +110,16 @@ var render = function () {
             [
               _c("v-icon", [_vm._v("mdi-cash")]),
               _vm._v(" "),
-              _c("span", [_vm._v("Rp " + _vm._s(_vm.campaign.required))]),
+              _c("span", [
+                _vm._v(
+                  "Rp\n        " +
+                    _vm._s(
+                      _vm.campaign.required
+                        ? "Rp " + _vm.campaign.required.toLocaleString()
+                        : "belum ada donasi"
+                    )
+                ),
+              ]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),

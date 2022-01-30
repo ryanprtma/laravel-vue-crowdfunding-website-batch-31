@@ -14,7 +14,7 @@ class CreateNoHpInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('no_hp')->after('email');
+            $table->string('no_hp')->nullable()->after('email');
         });
     }
 

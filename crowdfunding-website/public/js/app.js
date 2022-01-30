@@ -2023,6 +2023,14 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_Search_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Search.vue */ "./resources/js/components/Search.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2095,6 +2103,186 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "App",
+  components: {
+    Alert: function Alert() {
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Alert.vue */ "./resources/js/components/Alert.vue"));
+    },
+    Search: function Search() {
+      return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
+    },
+    Login: function Login() {
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+    }
+  },
+  data: function data() {
+    return {
+      drawer: true,
+      menus: [{
+        title: "Home",
+        icon: "mdi-home",
+        route: "/"
+      }, {
+        title: "Campaigns",
+        icon: "mdi-hand-heart",
+        route: "/campaigns"
+      }]
+    };
+  },
+  computed: _objectSpread(_objectSpread({
+    isHome: function isHome() {
+      console.log(this.$route.path);
+      return this.$route.path === "/" || this.$route.path === "/home";
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    transaction: "transaction/transactions",
+    guest: "auth/guest",
+    user: "auth/user",
+    dialogStatus: "dialog/status",
+    currentComponent: "dialog/component"
+  })), {}, {
+    // transaction() {
+    //   return this.$store.getters.transaction;
+    // },
+    dialog: {
+      get: function get() {
+        return this.dialogStatus;
+      },
+      set: function set(value) {
+        this.setDialogStatus(value);
+      }
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    setDialogStatus: "dialog/setStatus",
+    setDialogComponent: "dialog/setComponent",
+    setAuth: "auth/set",
+    setAlert: "alert/set",
+    checkToken: "auth/checkToken"
+  })), {}, {
+    logout: function logout() {
+      var _this = this;
+
+      var config = {
+        headers: {
+          Authorization: "Bearer" + this.user.token
+        }
+      };
+      axios.post("/api/auth/logout", {}, config).then(function (response) {
+        _this.setAuth({}); //kosongkan auth
+
+
+        _this.setAlert({
+          status: true,
+          color: "success",
+          text: "Berhasil Keluar"
+        });
+      });
+    }
+  }),
+  mounted: function mounted() {
+    if (this.user) {
+      this.checkToken(this.user);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2139,29 +2327,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "App",
+  name: "search",
+  components: {
+    CampaignItem: function CampaignItem() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./CampaignItem */ "./resources/js/components/CampaignItem.vue"));
+    }
+  },
   data: function data() {
     return {
-      drawer: true,
-      menus: [{
-        title: "Home",
-        icon: "mdi-home",
-        route: "/"
-      }, {
-        title: "Campaigns",
-        icon: "mdi-hand-heart",
-        route: "/campaigns"
-      }],
-      guest: false
+      keyword: "",
+      campaigns: []
     };
   },
-  computed: {
-    isHome: function isHome() {
-      console.log(this.$route.path);
-      return this.$route.path === "/" || this.$route.path === "/home";
+  methods: {
+    doSearch: function doSearch() {
+      var _this = this;
+
+      console.log("cari");
+      var keyword = this.keyword;
+
+      if (keyword.length > 0) {
+        var url = "/api/campaign/search/" + keyword;
+        axios.get(url).then(function (response) {
+          var data = response.data.data;
+          _this.campaigns = data.campaigns;
+          console.log(_this.campaigns);
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      } else {
+        this.campaigns = [];
+      }
     },
-    transaction: function transaction() {
-      return this.$store.getters.transaction;
+    close: function close() {
+      this.$emit("close", false);
     }
   }
 });
@@ -6637,6 +6836,117 @@ function toComment(sourceMap) {
 
 	return '/*# ' + data + ' */';
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/flatted/esm/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/flatted/esm/index.js ***!
+  \*******************************************/
+/*! exports provided: parse, stringify, toJSON, fromJSON */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stringify", function() { return stringify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toJSON", function() { return toJSON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fromJSON", function() { return fromJSON; });
+/*! (c) 2020 Andrea Giammarchi */
+
+const {parse: $parse, stringify: $stringify} = JSON;
+const {keys} = Object;
+
+const Primitive = String;   // it could be Number
+const primitive = 'string'; // it could be 'number'
+
+const ignore = {};
+const object = 'object';
+
+const noop = (_, value) => value;
+
+const primitives = value => (
+  value instanceof Primitive ? Primitive(value) : value
+);
+
+const Primitives = (_, value) => (
+  typeof value === primitive ? new Primitive(value) : value
+);
+
+const revive = (input, parsed, output, $) => {
+  const lazy = [];
+  for (let ke = keys(output), {length} = ke, y = 0; y < length; y++) {
+    const k = ke[y];
+    const value = output[k];
+    if (value instanceof Primitive) {
+      const tmp = input[value];
+      if (typeof tmp === object && !parsed.has(tmp)) {
+        parsed.add(tmp);
+        output[k] = ignore;
+        lazy.push({k, a: [input, parsed, tmp, $]});
+      }
+      else
+        output[k] = $.call(output, k, tmp);
+    }
+    else if (output[k] !== ignore)
+      output[k] = $.call(output, k, value);
+  }
+  for (let {length} = lazy, i = 0; i < length; i++) {
+    const {k, a} = lazy[i];
+    output[k] = $.call(output, k, revive.apply(null, a));
+  }
+  return output;
+};
+
+const set = (known, input, value) => {
+  const index = Primitive(input.push(value) - 1);
+  known.set(value, index);
+  return index;
+};
+
+const parse = (text, reviver) => {
+  const input = $parse(text, Primitives).map(primitives);
+  const value = input[0];
+  const $ = reviver || noop;
+  const tmp = typeof value === object && value ?
+              revive(input, new Set, value, $) :
+              value;
+  return $.call({'': tmp}, '', tmp);
+};
+
+const stringify = (value, replacer, space) => {
+  const $ = replacer && typeof replacer === object ?
+            (k, v) => (k === '' || -1 < replacer.indexOf(k) ? v : void 0) :
+            (replacer || noop);
+  const known = new Map;
+  const input = [];
+  const output = [];
+  let i = +set(known, input, $.call({'': value}, '', value));
+  let firstRun = !i;
+  while (i < input.length) {
+    firstRun = true;
+    output[i] = $stringify(input[i++], replace, space);
+  }
+  return '[' + output.join(',') + ']';
+  function replace(key, value) {
+    if (firstRun) {
+      firstRun = !firstRun;
+      return value;
+    }
+    const after = $.call(this, key, value);
+    switch (typeof after) {
+      case object:
+        if (after === null) return after;
+      case primitive:
+        return known.get(after) || set(known, input, after);
+    }
+    return after;
+  }
+};
+
+const toJSON = any => $parse(stringify(any));
+const fromJSON = any => parse($stringify(any));
 
 
 /***/ }),
@@ -38370,320 +38680,519 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-app",
+    "div",
+    { attrs: { id: "app" } },
     [
       _c(
-        "v-navigation-drawer",
-        {
-          attrs: { app: "" },
-          scopedSlots: _vm._u(
+        "v-app",
+        [
+          _c("alert"),
+          _vm._v(" "),
+          _c(
+            "keep-alive",
             [
-              !_vm.guest
-                ? {
-                    key: "append",
-                    fn: function () {
-                      return [
-                        _c(
-                          "div",
-                          { staticClass: "pa-2" },
-                          [
+              _c(
+                "v-dialog",
+                {
+                  attrs: {
+                    fullscreen: "",
+                    "hide-overlay": "",
+                    persistent: "",
+                    transition: "dialog-bottom",
+                  },
+                  model: {
+                    value: _vm.dialog,
+                    callback: function ($$v) {
+                      _vm.dialog = $$v
+                    },
+                    expression: "dialog",
+                  },
+                },
+                [
+                  _c(_vm.currentComponent, {
+                    tag: "component",
+                    on: { close: _vm.setDialogStatus },
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-navigation-drawer",
+            {
+              attrs: { app: "" },
+              scopedSlots: _vm._u(
+                [
+                  !_vm.guest
+                    ? {
+                        key: "append",
+                        fn: function () {
+                          return [
                             _c(
-                              "v-btn",
-                              { attrs: { block: "", color: "red", dark: "" } },
+                              "div",
+                              { staticClass: "pa-2" },
                               [
-                                _c("v-icon", { attrs: { left: "" } }, [
-                                  _vm._v("mdi-lock"),
-                                ]),
-                                _vm._v("\n          Logout\n        "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      block: "",
+                                      color: "red",
+                                      dark: "",
+                                    },
+                                    on: { click: _vm.logout },
+                                  },
+                                  [
+                                    _c("v-icon", { attrs: { left: "" } }, [
+                                      _vm._v("mdi-lock"),
+                                    ]),
+                                    _vm._v("\n            Logout\n          "),
+                                  ],
+                                  1
+                                ),
                               ],
                               1
                             ),
+                          ]
+                        },
+                        proxy: true,
+                      }
+                    : null,
+                ],
+                null,
+                true
+              ),
+              model: {
+                value: _vm.drawer,
+                callback: function ($$v) {
+                  _vm.drawer = $$v
+                },
+                expression: "drawer",
+              },
+            },
+            [
+              _c(
+                "v-list",
+                [
+                  !_vm.guest
+                    ? _c(
+                        "v-list-item",
+                        [
+                          _c(
+                            "v-list-item-avatar",
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src: "https://randomuser.me/api/portraits/men/78.jpg",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [
+                                _vm._v(_vm._s(_vm.user.user.name)),
+                              ]),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.guest
+                    ? _c(
+                        "div",
+                        { staticClass: "pa-2" },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mb-1",
+                              attrs: {
+                                elevation: "0",
+                                block: "",
+                                color: "primary",
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.setDialogComponent("login")
+                                },
+                              },
+                            },
+                            [
+                              _c("v-icon", { attrs: { left: "" } }, [
+                                _vm._v("mdi-lock"),
+                              ]),
+                              _vm._v("\n            Login\n          "),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                elevation: "0",
+                                block: "",
+                                color: "succes",
+                              },
+                            },
+                            [
+                              _c("v-icon", { attrs: { left: "" } }, [
+                                _vm._v("mdi-account"),
+                              ]),
+                              _vm._v("\n            Register\n          "),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _vm._l(_vm.menus, function (item, index) {
+                    return _c(
+                      "v-list-item",
+                      { key: "menu-" + index, attrs: { to: item.route } },
+                      [
+                        _c(
+                          "v-list-item-icon",
+                          [
+                            _c("v-icon", { attrs: { left: "" } }, [
+                              _vm._v(_vm._s(item.icon)),
+                            ]),
                           ],
                           1
                         ),
-                      ]
-                    },
-                    proxy: true,
-                  }
-                : null,
-            ],
-            null,
-            true
-          ),
-          model: {
-            value: _vm.drawer,
-            callback: function ($$v) {
-              _vm.drawer = $$v
-            },
-            expression: "drawer",
-          },
-        },
-        [
-          _c(
-            "v-list",
-            [
-              !_vm.guest
-                ? _c(
-                    "v-list-item",
-                    [
-                      _c(
-                        "v-list-item-avatar",
-                        [
-                          _c("v-img", {
-                            attrs: {
-                              src: "https://randomuser.me/api/portraits/men/78.jpg",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list-item-content",
-                        [_c("v-list-item-title", [_vm._v("John Leider")])],
-                        1
-                      ),
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.guest
-                ? _c(
-                    "div",
-                    { staticClass: "pa-2" },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "mb-1",
-                          attrs: {
-                            elevation: "0",
-                            block: "",
-                            color: "primary",
-                          },
-                        },
-                        [
-                          _c("v-icon", { attrs: { left: "" } }, [
-                            _vm._v("mdi-lock"),
-                          ]),
-                          _vm._v("\n          Login\n        "),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { elevation: "0", block: "", color: "succes" },
-                        },
-                        [
-                          _c("v-icon", { attrs: { left: "" } }, [
-                            _vm._v("mdi-account"),
-                          ]),
-                          _vm._v("\n          Register\n        "),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("v-divider"),
-              _vm._v(" "),
-              _vm._l(_vm.menus, function (item, index) {
-                return _c(
-                  "v-list-item",
-                  { key: "menu-" + index, attrs: { to: item.route } },
-                  [
-                    _c(
-                      "v-list-item-icon",
-                      [
-                        _c("v-icon", { attrs: { left: "" } }, [
-                          _vm._v(_vm._s(item.icon)),
-                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-list-item-content",
+                          [
+                            _c("v-list-item-title", [
+                              _vm._v(_vm._s(item.title)),
+                            ]),
+                          ],
+                          1
+                        ),
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-list-item-content",
-                      [_c("v-list-item-title", [_vm._v(_vm._s(item.title))])],
-                      1
-                    ),
-                  ],
-                  1
-                )
-              }),
+                    )
+                  }),
+                ],
+                2
+              ),
             ],
-            2
+            1
+          ),
+          _vm._v(" "),
+          _vm.isHome
+            ? _c(
+                "v-app-bar",
+                { attrs: { app: "", color: "success", dark: "" } },
+                [
+                  _c("v-app-bar-nav-icon", {
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        _vm.drawer = !_vm.drawer
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("v-toolbar-title", [_vm._v("Crowdfunding App")]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { attrs: { icon: "" } },
+                    [
+                      _vm.transaction > 0
+                        ? _c(
+                            "v-badge",
+                            {
+                              attrs: { color: "orange", overlap: "" },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "badge",
+                                    fn: function () {
+                                      return [
+                                        _c("span", [
+                                          _vm._v(_vm._s(_vm.transaction)),
+                                        ]),
+                                      ]
+                                    },
+                                    proxy: true,
+                                  },
+                                ],
+                                null,
+                                false,
+                                1793511274
+                              ),
+                            },
+                            [
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("mdi-cash-multiple")]),
+                            ],
+                            1
+                          )
+                        : _c("v-icon", [_vm._v("mdi-cash-multiple")]),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      slot: "extension",
+                      "hide-details": "",
+                      "append-icon": "mdi-microphone",
+                      flat: "",
+                      label: "Search",
+                      "prepend-inner-icon": "mdi-magnify",
+                      "solo-inverted": "",
+                    },
+                    on: {
+                      click: function ($event) {
+                        return _vm.setDialogComponent("search")
+                      },
+                      input: function ($event) {
+                        return _vm.setDialogComponent("search")
+                      },
+                    },
+                    slot: "extension",
+                  }),
+                ],
+                1
+              )
+            : _c(
+                "v-app-bar",
+                { attrs: { app: "", color: "success", dark: "" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "" },
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.$router.go(-1)
+                        },
+                      },
+                    },
+                    [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { attrs: { icon: "" } },
+                    [
+                      _vm.transaction > 0
+                        ? _c(
+                            "v-badge",
+                            {
+                              attrs: { color: "orange", overlap: "" },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "badge",
+                                    fn: function () {
+                                      return [
+                                        _c("span", [
+                                          _vm._v(_vm._s(_vm.transaction)),
+                                        ]),
+                                      ]
+                                    },
+                                    proxy: true,
+                                  },
+                                ],
+                                null,
+                                false,
+                                1793511274
+                              ),
+                            },
+                            [
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("mdi-cash-multiple")]),
+                            ],
+                            1
+                          )
+                        : _c("v-icon", [_vm._v("mdi-cash-multiple")]),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+          _vm._v(" "),
+          _c(
+            "v-main",
+            [
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [_c("v-slide-y-transition", [_c("router-view")], 1)],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-footer",
+                { attrs: { absolute: "", app: "" } },
+                [
+                  _c("v-card-text", { staticClass: "text-center" }, [
+                    _vm._v(
+                      "\n          © " +
+                        _vm._s(new Date().getFullYear()) +
+                        " - "
+                    ),
+                    _c("strong", [_vm._v("ryan")]),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
           ),
         ],
         1
       ),
-      _vm._v(" "),
-      _vm.isHome
-        ? _c(
-            "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
-            [
-              _c("v-app-bar-nav-icon", {
-                on: {
-                  click: function ($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  },
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { dark: "", color: "success" } },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { icon: "", dark: "" },
+              nativeOn: {
+                click: function ($event) {
+                  return _vm.close.apply(null, arguments)
                 },
-              }),
-              _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("Crowdfunding App")]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { icon: "" } },
-                [
-                  _vm.transaction > 0
-                    ? _c(
-                        "v-badge",
-                        {
-                          attrs: { color: "orange", overlap: "" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "badge",
-                                fn: function () {
-                                  return [
-                                    _c("span", [
-                                      _vm._v(_vm._s(_vm.transaction)),
-                                    ]),
-                                  ]
-                                },
-                                proxy: true,
-                              },
-                            ],
-                            null,
-                            false,
-                            1793511274
-                          ),
-                        },
-                        [
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("mdi-cash-multiple")]),
-                        ],
-                        1
-                      )
-                    : _c("v-icon", [_vm._v("mdi-cash-multiple")]),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  slot: "extension",
-                  "hide-details": "",
-                  "append-icon": "mdi-microphone",
-                  flat: "",
-                  label: "search",
-                  "prepend-inner-icon": "mdi-magnify",
-                  "solo-inverted": "",
-                },
-                slot: "extension",
-              }),
-            ],
-            1
-          )
-        : _c(
-            "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { icon: "" },
-                  on: {
-                    click: function ($event) {
-                      $event.stopPropagation()
-                      return _vm.$router.go(-1)
-                    },
-                  },
-                },
-                [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { icon: "" } },
-                [
-                  _vm.transaction > 0
-                    ? _c(
-                        "v-badge",
-                        {
-                          attrs: { color: "orange", overlap: "" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "badge",
-                                fn: function () {
-                                  return [
-                                    _c("span", [
-                                      _vm._v(_vm._s(_vm.transaction)),
-                                    ]),
-                                  ]
-                                },
-                                proxy: true,
-                              },
-                            ],
-                            null,
-                            false,
-                            1793511274
-                          ),
-                        },
-                        [
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("mdi-cash-multiple")]),
-                        ],
-                        1
-                      )
-                    : _c("v-icon", [_vm._v("mdi-cash-multiple")]),
-                ],
-                1
-              ),
-            ],
+              },
+            },
+            [_c("v-icon", [_vm._v("mdi-close")])],
             1
           ),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              "hide-details": "",
+              "append-icon": "mdi-microphone",
+              flat: "",
+              autofocus: "",
+              label: "Search",
+              "prepend-inner-icon": "mdi-magnify",
+            },
+            on: { input: _vm.doSearch },
+            model: {
+              value: _vm.keyword,
+              callback: function ($$v) {
+                _vm.keyword = $$v
+              },
+              expression: "keyword",
+            },
+          }),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
-        "v-main",
+        "v-card-text",
         [
+          _vm.keyword.length > 0
+            ? _c("v-subheader", [
+                _vm._v(
+                  '\n      Result search "' + _vm._s(_vm.keyword) + '"\n    '
+                ),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "v-alert",
+            {
+              attrs: {
+                value: _vm.campaigns.length == 0 && _vm.keyword.length > 0,
+                color: "warning",
+                outlined: "",
+              },
+            },
+            [_vm._v("\n      Sorry, but no results were found.\n    ")]
+          ),
+          _vm._v(" "),
           _c(
             "v-container",
-            { attrs: { fluid: "" } },
-            [_c("v-slide-y-transition", [_c("router-view")], 1)],
-            1
-          ),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-footer",
-            { attrs: { absolute: "", app: "" } },
+            { staticClass: "ma-0 pa-0", attrs: { "grid-list-sm": "" } },
             [
-              _c("v-card-text", { staticClass: "text-center" }, [
-                _vm._v(
-                  "\n        © " + _vm._s(new Date().getFullYear()) + " - "
-                ),
-                _c("strong", [_vm._v("ryan")]),
-              ]),
+              _c(
+                "v-layout",
+                { attrs: { wrap: "" } },
+                _vm._l(_vm.campaigns, function (campaign) {
+                  return _c(
+                    "v-flex",
+                    { key: "campaign-" + campaign.id, attrs: { xs6: "" } },
+                    [
+                      _c("campaign-item", {
+                        attrs: { campaign: campaign },
+                        nativeOn: {
+                          click: function ($event) {
+                            return _vm.close.apply(null, arguments)
+                          },
+                        },
+                      }),
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
             ],
             1
           ),
@@ -100323,6 +100832,435 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/vuex-persist/dist/esm/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/vuex-persist/dist/esm/index.js ***!
+  \*****************************************************/
+/*! exports provided: default, MockStorage, VuexPersistence */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MockStorage", function() { return MockStorage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VuexPersistence", function() { return VuexPersistence; });
+/* harmony import */ var deepmerge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! deepmerge */ "./node_modules/vuex-persist/node_modules/deepmerge/dist/cjs.js");
+/* harmony import */ var deepmerge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/**
+ * Created by championswimmer on 22/07/17.
+ */
+let MockStorage;
+// @ts-ignore
+{
+    MockStorage = class {
+        get length() {
+            return Object.keys(this).length;
+        }
+        key(index) {
+            return Object.keys(this)[index];
+        }
+        setItem(key, data) {
+            this[key] = data.toString();
+        }
+        getItem(key) {
+            return this[key];
+        }
+        removeItem(key) {
+            delete this[key];
+        }
+        clear() {
+            for (let key of Object.keys(this)) {
+                delete this[key];
+            }
+        }
+    };
+}
+
+// tslint:disable: variable-name
+class SimplePromiseQueue {
+    constructor() {
+        this._queue = [];
+        this._flushing = false;
+    }
+    enqueue(promise) {
+        this._queue.push(promise);
+        if (!this._flushing) {
+            return this.flushQueue();
+        }
+        return Promise.resolve();
+    }
+    flushQueue() {
+        this._flushing = true;
+        const chain = () => {
+            const nextTask = this._queue.shift();
+            if (nextTask) {
+                return nextTask.then(chain);
+            }
+            else {
+                this._flushing = false;
+            }
+        };
+        return Promise.resolve(chain());
+    }
+}
+
+const options = {
+    replaceArrays: {
+        arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+    },
+    concatArrays: {
+        arrayMerge: (target, source, options) => target.concat(...source)
+    }
+};
+function merge(into, from, mergeOption) {
+    return deepmerge__WEBPACK_IMPORTED_MODULE_0___default()(into, from, options[mergeOption]);
+}
+
+let FlattedJSON = JSON;
+/**
+ * A class that implements the vuex persistence.
+ * @type S type of the 'state' inside the store (default: any)
+ */
+class VuexPersistence {
+    /**
+     * Create a {@link VuexPersistence} object.
+     * Use the <code>plugin</code> function of this class as a
+     * Vuex plugin.
+     * @param {PersistOptions} options
+     */
+    constructor(options) {
+        // tslint:disable-next-line:variable-name
+        this._mutex = new SimplePromiseQueue();
+        /**
+         * Creates a subscriber on the store. automatically is used
+         * when this is used a vuex plugin. Not for manual usage.
+         * @param store
+         */
+        this.subscriber = (store) => (handler) => store.subscribe(handler);
+        if (typeof options === 'undefined')
+            options = {};
+        this.key = ((options.key != null) ? options.key : 'vuex');
+        this.subscribed = false;
+        this.supportCircular = options.supportCircular || false;
+        if (this.supportCircular) {
+            FlattedJSON = __webpack_require__(/*! flatted */ "./node_modules/flatted/esm/index.js");
+        }
+        this.mergeOption = options.mergeOption || 'replaceArrays';
+        let localStorageLitmus = true;
+        try {
+            window.localStorage.getItem('');
+        }
+        catch (err) {
+            localStorageLitmus = false;
+        }
+        /**
+         * 1. First, prefer storage sent in optinos
+         * 2. Otherwise, use window.localStorage if available
+         * 3. Finally, try to use MockStorage
+         * 4. None of above? Well we gotta fail.
+         */
+        if (options.storage) {
+            this.storage = options.storage;
+        }
+        else if (localStorageLitmus) {
+            this.storage = window.localStorage;
+        }
+        else if (MockStorage) {
+            this.storage = new MockStorage();
+        }
+        else {
+            throw new Error("Neither 'window' is defined, nor 'MockStorage' is available");
+        }
+        /**
+         * How this works is -
+         *  1. If there is options.reducer function, we use that, if not;
+         *  2. We check options.modules;
+         *    1. If there is no options.modules array, we use entire state in reducer
+         *    2. Otherwise, we create a reducer that merges all those state modules that are
+         *        defined in the options.modules[] array
+         * @type {((state: S) => {}) | ((state: S) => S) | ((state: any) => {})}
+         */
+        this.reducer = ((options.reducer != null)
+            ? options.reducer
+            : ((options.modules == null)
+                ? ((state) => state)
+                : ((state) => options.modules.reduce((a, i) => merge(a, { [i]: state[i] }, this.mergeOption), { /* start empty accumulator*/}))));
+        this.filter = options.filter || ((mutation) => true);
+        this.strictMode = options.strictMode || false;
+        this.RESTORE_MUTATION = function RESTORE_MUTATION(state, savedState) {
+            const mergedState = merge(state, savedState || {}, this.mergeOption);
+            for (const propertyName of Object.keys(mergedState)) {
+                this._vm.$set(state, propertyName, mergedState[propertyName]);
+            }
+        };
+        this.asyncStorage = options.asyncStorage || false;
+        if (this.asyncStorage) {
+            /**
+             * Async {@link #VuexPersistence.restoreState} implementation
+             * @type {((key: string, storage?: Storage) =>
+             *      (Promise<S> | S)) | ((key: string, storage: AsyncStorage) => Promise<any>)}
+             */
+            this.restoreState = ((options.restoreState != null)
+                ? options.restoreState
+                : ((key, storage) => (storage).getItem(key)
+                    .then((value) => typeof value === 'string' // If string, parse, or else, just return
+                    ? (this.supportCircular
+                        ? FlattedJSON.parse(value || '{}')
+                        : JSON.parse(value || '{}'))
+                    : (value || {}))));
+            /**
+             * Async {@link #VuexPersistence.saveState} implementation
+             * @type {((key: string, state: {}, storage?: Storage) =>
+             *    (Promise<void> | void)) | ((key: string, state: {}, storage?: Storage) => Promise<void>)}
+             */
+            this.saveState = ((options.saveState != null)
+                ? options.saveState
+                : ((key, state, storage) => (storage).setItem(key, // Second argument is state _object_ if asyc storage, stringified otherwise
+                // do not stringify the state if the storage type is async
+                (this.asyncStorage
+                    ? merge({}, state || {}, this.mergeOption)
+                    : (this.supportCircular
+                        ? FlattedJSON.stringify(state)
+                        : JSON.stringify(state))))));
+            /**
+             * Async version of plugin
+             * @param {Store<S>} store
+             */
+            this.plugin = (store) => {
+                /**
+                 * For async stores, we're capturing the Promise returned
+                 * by the `restoreState()` function in a `restored` property
+                 * on the store itself. This would allow app developers to
+                 * determine when and if the store's state has indeed been
+                 * refreshed. This approach was suggested by GitHub user @hotdogee.
+                 * See https://github.com/championswimmer/vuex-persist/pull/118#issuecomment-500914963
+                 * @since 2.1.0
+                 */
+                store.restored = (this.restoreState(this.key, this.storage)).then((savedState) => {
+                    /**
+                     * If in strict mode, do only via mutation
+                     */
+                    if (this.strictMode) {
+                        store.commit('RESTORE_MUTATION', savedState);
+                    }
+                    else {
+                        store.replaceState(merge(store.state, savedState || {}, this.mergeOption));
+                    }
+                    this.subscriber(store)((mutation, state) => {
+                        if (this.filter(mutation)) {
+                            this._mutex.enqueue(this.saveState(this.key, this.reducer(state), this.storage));
+                        }
+                    });
+                    this.subscribed = true;
+                });
+            };
+        }
+        else {
+            /**
+             * Sync {@link #VuexPersistence.restoreState} implementation
+             * @type {((key: string, storage?: Storage) =>
+             *    (Promise<S> | S)) | ((key: string, storage: Storage) => (any | string | {}))}
+             */
+            this.restoreState = ((options.restoreState != null)
+                ? options.restoreState
+                : ((key, storage) => {
+                    const value = (storage).getItem(key);
+                    if (typeof value === 'string') { // If string, parse, or else, just return
+                        return (this.supportCircular
+                            ? FlattedJSON.parse(value || '{}')
+                            : JSON.parse(value || '{}'));
+                    }
+                    else {
+                        return (value || {});
+                    }
+                }));
+            /**
+             * Sync {@link #VuexPersistence.saveState} implementation
+             * @type {((key: string, state: {}, storage?: Storage) =>
+             *     (Promise<void> | void)) | ((key: string, state: {}, storage?: Storage) => Promise<void>)}
+             */
+            this.saveState = ((options.saveState != null)
+                ? options.saveState
+                : ((key, state, storage) => (storage).setItem(key, // Second argument is state _object_ if localforage, stringified otherwise
+                (this.supportCircular
+                    ? FlattedJSON.stringify(state)
+                    : JSON.stringify(state)))));
+            /**
+             * Sync version of plugin
+             * @param {Store<S>} store
+             */
+            this.plugin = (store) => {
+                const savedState = this.restoreState(this.key, this.storage);
+                if (this.strictMode) {
+                    store.commit('RESTORE_MUTATION', savedState);
+                }
+                else {
+                    store.replaceState(merge(store.state, savedState || {}, this.mergeOption));
+                }
+                this.subscriber(store)((mutation, state) => {
+                    if (this.filter(mutation)) {
+                        this.saveState(this.key, this.reducer(state), this.storage);
+                    }
+                });
+                this.subscribed = true;
+            };
+        }
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (VuexPersistence);
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/vuex-persist/node_modules/deepmerge/dist/cjs.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vuex-persist/node_modules/deepmerge/dist/cjs.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isMergeableObject = function isMergeableObject(value) {
+	return isNonNullObject(value)
+		&& !isSpecial(value)
+};
+
+function isNonNullObject(value) {
+	return !!value && typeof value === 'object'
+}
+
+function isSpecial(value) {
+	var stringValue = Object.prototype.toString.call(value);
+
+	return stringValue === '[object RegExp]'
+		|| stringValue === '[object Date]'
+		|| isReactElement(value)
+}
+
+// see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
+
+function isReactElement(value) {
+	return value.$$typeof === REACT_ELEMENT_TYPE
+}
+
+function emptyTarget(val) {
+	return Array.isArray(val) ? [] : {}
+}
+
+function cloneUnlessOtherwiseSpecified(value, options) {
+	return (options.clone !== false && options.isMergeableObject(value))
+		? deepmerge(emptyTarget(value), value, options)
+		: value
+}
+
+function defaultArrayMerge(target, source, options) {
+	return target.concat(source).map(function(element) {
+		return cloneUnlessOtherwiseSpecified(element, options)
+	})
+}
+
+function getMergeFunction(key, options) {
+	if (!options.customMerge) {
+		return deepmerge
+	}
+	var customMerge = options.customMerge(key);
+	return typeof customMerge === 'function' ? customMerge : deepmerge
+}
+
+function getEnumerableOwnPropertySymbols(target) {
+	return Object.getOwnPropertySymbols
+		? Object.getOwnPropertySymbols(target).filter(function(symbol) {
+			return target.propertyIsEnumerable(symbol)
+		})
+		: []
+}
+
+function getKeys(target) {
+	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
+}
+
+function propertyIsOnObject(object, property) {
+	try {
+		return property in object
+	} catch(_) {
+		return false
+	}
+}
+
+// Protects from prototype poisoning and unexpected merging up the prototype chain.
+function propertyIsUnsafe(target, key) {
+	return propertyIsOnObject(target, key) // Properties are safe to merge if they don't exist in the target yet,
+		&& !(Object.hasOwnProperty.call(target, key) // unsafe if they exist up the prototype chain,
+			&& Object.propertyIsEnumerable.call(target, key)) // and also unsafe if they're nonenumerable.
+}
+
+function mergeObject(target, source, options) {
+	var destination = {};
+	if (options.isMergeableObject(target)) {
+		getKeys(target).forEach(function(key) {
+			destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+		});
+	}
+	getKeys(source).forEach(function(key) {
+		if (propertyIsUnsafe(target, key)) {
+			return
+		}
+
+		if (propertyIsOnObject(target, key) && options.isMergeableObject(source[key])) {
+			destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
+		} else {
+			destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+		}
+	});
+	return destination
+}
+
+function deepmerge(target, source, options) {
+	options = options || {};
+	options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+	options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+	// cloneUnlessOtherwiseSpecified is added to `options` so that custom arrayMerge()
+	// implementations can use it. The caller may not replace it.
+	options.cloneUnlessOtherwiseSpecified = cloneUnlessOtherwiseSpecified;
+
+	var sourceIsArray = Array.isArray(source);
+	var targetIsArray = Array.isArray(target);
+	var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+	if (!sourceAndTargetTypesMatch) {
+		return cloneUnlessOtherwiseSpecified(source, options)
+	} else if (sourceIsArray) {
+		return options.arrayMerge(target, source, options)
+	} else {
+		return mergeObject(target, source, options)
+	}
+}
+
+deepmerge.all = function deepmergeAll(array, options) {
+	if (!Array.isArray(array)) {
+		throw new Error('first argument should be an array')
+	}
+
+	return array.reduce(function(prev, next) {
+		return deepmerge(prev, next, options)
+	}, {})
+};
+
+var deepmerge_1 = deepmerge;
+
+module.exports = deepmerge_1;
+
+
+/***/ }),
+
 /***/ "./node_modules/vuex/dist/vuex.esm.js":
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
@@ -101801,6 +102739,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/Search.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Search.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Search.vue?vue&type=template&id=5026ffd3& */ "./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&");
+/* harmony import */ var _Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Search.vue?vue&type=script&lang=js& */ "./resources/js/components/Search.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Search.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Search.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Search.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Search.vue?vue&type=template&id=5026ffd3& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Search.vue?vue&type=template&id=5026ffd3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Search.vue?vue&type=template&id=5026ffd3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Search_vue_vue_type_template_id_5026ffd3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/plugins/vuetify.js":
 /*!*****************************************!*\
   !*** ./resources/js/plugins/vuetify.js ***!
@@ -101875,6 +102882,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() | categories */ "categories").then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
+    path: '/auth/social/:provider/callback',
+    name: 'social',
+    component: function component() {
+      return __webpack_require__.e(/*! import() | categories */ "categories").then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
+    }
+  }, {
     path: '*',
     redirect: '/'
   }]
@@ -101895,25 +102908,202 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _stores_transaction_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stores/transaction.js */ "./resources/js/stores/transaction.js");
+/* harmony import */ var _stores_alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stores/alert */ "./resources/js/stores/alert.js");
+/* harmony import */ var _stores_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stores/auth */ "./resources/js/stores/auth.js");
+/* harmony import */ var _stores_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stores/dialog */ "./resources/js/stores/dialog.js");
+/* harmony import */ var vuex_persist__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex-persist */ "./node_modules/vuex-persist/dist/esm/index.js");
 
 
+
+
+
+
+
+var vuexPersist = new vuex_persist__WEBPACK_IMPORTED_MODULE_6__["default"]({
+  key: 'crowdfunding',
+  storage: localStorage
+});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  plugins: [vuexPersist.plugin],
+  modules: {
+    transaction: _stores_transaction_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+    alert: _stores_alert__WEBPACK_IMPORTED_MODULE_3__["default"],
+    auth: _stores_auth__WEBPACK_IMPORTED_MODULE_4__["default"],
+    dialog: _stores_dialog__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }
+}));
+
+/***/ }),
+
+/***/ "./resources/js/stores/alert.js":
+/*!**************************************!*\
+  !*** ./resources/js/stores/alert.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
   state: {
-    transaction: 0
+    status: false,
+    color: 'success',
+    text: ''
+  },
+  mutations: {
+    set: function set(state, payload) {
+      state.status = payload.status;
+      state.text = payload.text;
+      state.color = payload.color;
+    }
+  },
+  actions: {
+    set: function set(_ref, payload) {
+      var commit = _ref.commit;
+      commit('set', payload);
+    }
+  },
+  getters: {
+    status: function status(state) {
+      return state.status;
+    },
+    color: function color(state) {
+      return state.color;
+    },
+    text: function text(state) {
+      return state.text;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/stores/auth.js":
+/*!*************************************!*\
+  !*** ./resources/js/stores/auth.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    user: {}
+  },
+  mutations: {
+    set: function set(state, payload) {
+      state.user = payload;
+    }
+  },
+  actions: {
+    set: function set(_ref, payload) {
+      var commit = _ref.commit;
+      commit('set', payload);
+    },
+    checkToken: function checkToken(_ref2, payload) {
+      var commit = _ref2.commit;
+      var config = {
+        headers: {
+          'Authorization': 'Bearer' + payload.token
+        }
+      };
+      axios.post('/api/auth/check-token', {}, config).then(function (response) {
+        console.log(response.data);
+        commit('set', payload);
+      })["catch"](function (error) {
+        commit('set', {});
+      });
+    }
+  },
+  getters: {
+    user: function user(state) {
+      return state.user;
+    },
+    guest: function guest(state) {
+      return Object.keys(state.user).length == 0;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/stores/dialog.js":
+/*!***************************************!*\
+  !*** ./resources/js/stores/dialog.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    status: false,
+    component: 'search'
+  },
+  mutations: {
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    },
+    setComponent: function setComponent(state, component) {
+      state.component = component;
+    }
+  },
+  actions: {
+    setStatus: function setStatus(_ref, status) {
+      var commit = _ref.commit;
+      commit('setStatus', status);
+    },
+    setComponent: function setComponent(_ref2, component) {
+      var commit = _ref2.commit;
+      commit('setComponent', component);
+      commit('setStatus', true);
+    }
+  },
+  getters: {
+    status: function status(state) {
+      return state.status;
+    },
+    component: function component(state) {
+      return state.component;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/stores/transaction.js":
+/*!********************************************!*\
+  !*** ./resources/js/stores/transaction.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    transactions: 0
   },
   mutations: {
     insert: function insert(state, payload) {
-      state.transaction++;
+      state.transactions++;
     }
   },
   actions: {},
   getters: {
-    transaction: function transaction(state) {
-      return state.transaction;
+    transactions: function transactions(state) {
+      return state.transactions;
     }
   }
-}));
+});
 
 /***/ }),
 

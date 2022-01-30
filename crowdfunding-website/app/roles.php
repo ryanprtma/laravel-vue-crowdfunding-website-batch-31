@@ -14,14 +14,14 @@ class roles extends Model
     
 
     
-    // public function user()
-    // {
-    //     return $this->hasMany('App\user');
-    // }
-    
-    public function User()
+    public function user()
     {
-        return $this->hasMany('App\User');
-    } 
+        return $this->hasMany('App\user');
+    }
+    
+    // public function User()
+    // {
+    //     return $this->hasMany('App\User');
+    // } 
     
 }

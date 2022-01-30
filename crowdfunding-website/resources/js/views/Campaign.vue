@@ -45,7 +45,7 @@
           block
           color="primary"
           @click="donate"
-          :disable="campaign.collected >= campaign.required"
+          :disabled="campaign.collected >= campaign.required"
         >
           <v-icon>mdi-money</v-icon> &nbsp; DONATE
         </v-btn>
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapActions, mapMutations } from "vuex";
+
 export default {
   data: () => ({
     campaign: {},
@@ -80,8 +82,23 @@ export default {
           console.log(error);
         });
     },
+    // ...mapMutations({ donate: "transaction/insert" }),
+    // donate() {
+    //   this.$store.commit("insert");
+    // },
+    ...mapMutations({
+      tambahTransaksi: "transaction/insert",
+    }),
+    ...mapActions({
+      setAlert: "alert/set",
+    }),
     donate() {
-      this.$store.commit("insert");
+      this.tambahTransaksi();
+      this.setAlert({
+        status: true,
+        color: "success",
+        text: "Transaksi Ditambahkan",
+      });
     },
   },
 };
